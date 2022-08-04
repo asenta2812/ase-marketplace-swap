@@ -47,7 +47,6 @@ export const WalletConnect: React.FC<WalletConnectProps> = () => {
   );
 
   const handleSignIn = async () => {
-    console.log('123123123');
     if (loading) {
       return;
     }
