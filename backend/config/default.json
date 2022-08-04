@@ -1,0 +1,28 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "3QDM5b4I38T4cw/nrzcb6Wec3Uk=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://asenta.xyz",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    }
+  },
+  "mongodb": "mongodb+srv://nghiachi:u6PzMOopqt3aZa1C@project-1.gshpd.mongodb.net/test"
+}

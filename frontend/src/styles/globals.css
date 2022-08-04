@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@400;500;600;700&display=swap');
+
+html,
+body {
+  font-size: 16px;
+}
+
+.custom-dropdown .ant-dropdown-menu-item {
+  @apply text-gray-50;
+}
+.custom-dropdown .ant-dropdown-menu-item:hover {
+  @apply bg-gray-700 transition ease-in-out duration-300;
+}
+
+.asen-menu.ant-menu-item {
+  display: flex !important;
+  @apply transition-all ease-in-out duration-300;
+}
+.asen-menu.ant-menu-item::after {
+  border: none !important;
+}
+.asen-menu.ant-menu-item-active::after {
+  border: none !important;
+}
+.asen-menu.ant-menu-item-active {
+  @apply text-indigo-400 !important;
+}
+
+.asen-menu.ant-menu-item-selected {
+  @apply text-indigo-500 !important;
+}
+.asen-menu.ant-menu-item-selected::after {
+  border: none !important;
+}
