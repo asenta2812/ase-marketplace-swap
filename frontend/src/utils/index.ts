@@ -1,5 +1,5 @@
 import CHAINS from '@/configs/chains.json';
-import { KEY_ACCESS_TOKEN, OWNER_ADDRESS, ChainId } from '@/configs/contants';
+import { KEY_ACCESS_TOKEN, OWNER_ADDRESS, ChainId } from './constants';
 import { Web3Provider } from '@ethersproject/providers';
 import { AxiosRequestConfig, Method } from 'axios';
 import axios from './axios';
@@ -35,13 +35,18 @@ export const removeLocalStorage = (key = KEY_ACCESS_TOKEN): void => {
   }
   localStorage.removeItem(key);
 };
-
+export interface BaseResponse {
+  total: number;
+  limit: number;
+  skip: number;
+  data: any[];
+}
 interface RequestAsyncProps<X> extends AxiosRequestConfig {
   method: Method;
   url: string;
   data?: X;
 }
-export const requestAsync = <T, X = any>({
+export const requestAsync = <T = BaseResponse, X = any>({
   method,
   url,
   data,
@@ -103,4 +108,10 @@ export const getSigner = (
 export const getIsValidAccessToken = () => {
   const jwt = parseJwt();
   return jwt && new Date(jwt.exp * 1000) > new Date();
+};
+
+export const getFullUrlImage = (name: string) => {
+  if (!name) return '';
+
+  return (process.env.NEXT_PUBLIC_CDN_URL as string) + name;
 };

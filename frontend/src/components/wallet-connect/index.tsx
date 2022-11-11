@@ -13,7 +13,6 @@ import { Web3Provider } from '@ethersproject/providers';
 import { formatEther } from '@ethersproject/units';
 import { useWeb3React } from '@web3-react/core';
 import { Menu, Row, Typography } from 'antd';
-import { ethers } from 'ethers';
 import React, {
   useCallback,
   useEffect,
@@ -34,31 +33,36 @@ export const WalletConnect: React.FC<WalletConnectProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { Metamask } = getWalletActive();
   const isValidAccessToken = getIsValidAccessToken();
-  const refAccount = useRef<string>();
+
+  const handleSignOut = useCallback(() => {
+    removeLocalStorage();
+    deactivate();
+  }, [deactivate]);
 
   const handleMenuClick = useCallback(
     ({ key }: { key: string }) => {
       if (key === 'sign_out') {
-        removeLocalStorage();
-        deactivate();
+        handleSignOut();
       }
     },
-    [deactivate]
+    [handleSignOut]
   );
 
-  const handleSignIn = async () => {
+  const handleSignIn = useCallback(async () => {
     if (loading) {
       return;
     }
     setLoading(true);
-    const acc = await Metamask.getAccount();
-    const eth = new ethers.providers.Web3Provider(await Metamask.getProvider());
-    const signer = getSigner(eth, acc);
-    if (!acc || !signer) {
-      setLoading(false);
-      return;
-    }
+
     try {
+      const acc = await Metamask.getAccount();
+      const provider = await Metamask.getProvider();
+      const web3Provider = new Web3Provider(provider);
+      const signer = getSigner(web3Provider, acc);
+      if (!acc || !signer) {
+        setLoading(false);
+        return;
+      }
       const { nonce, address } = await requestNonce(acc);
       const signature = await signer.signMessage(nonce.toString());
       const { access_token } = await verifySignature(signature, nonce, address);
@@ -70,24 +74,41 @@ export const WalletConnect: React.FC<WalletConnectProps> = () => {
     } finally {
       setLoading(false);
     }
+  }, [Metamask, activate, deactivate, loading]);
+
+  const accountChanged = useCallback(
+    async (e: any) => {
+      const arr = Array.from(e);
+      if (arr && arr[0]) {
+        await handleSignIn();
+      } else {
+        handleSignOut();
+      }
+    },
+    [handleSignOut, handleSignIn]
+  );
+
+  const chainChanged = (e: any) => {
+    console.log('chain changed', e);
   };
 
   useEffect(() => {
-    if (!account) {
-      return;
-    }
-    if (!refAccount.current) {
-      refAccount.current = account;
-    }
-    if (account !== refAccount.current) {
-      (async () => {
-        await handleSignIn();
-        refAccount.current = account;
-      })();
+    // refAccount.current = account;
+    const metamask = (window as any).ethereum;
+    if (metamask && metamask.on) {
+      metamask.on('accountsChanged', accountChanged);
+      metamask.on('chainChanged', chainChanged);
     }
 
-    // refAccount.current = account;
-  }, [account]);
+    return () => {
+      const metamask = (window as any).ethereum;
+
+      if (metamask && metamask.on) {
+        metamask.removeListener('accountsChanged', accountChanged);
+        metamask.removeListener('chainChanged', chainChanged);
+      }
+    };
+  }, [account, accountChanged]);
 
   // refresh page
   useEffect(() => {
@@ -138,7 +159,7 @@ export const WalletConnect: React.FC<WalletConnectProps> = () => {
   }, [error]);
 
   useEffect(() => {
-    if (account && library && chainId) {
+    if (account && library && chainId && !error) {
       const get = async () => {
         const asenContract = getASETokenContract(library.getSigner(account));
         const balanceBN = await asenContract.balanceOf(account);
@@ -162,7 +183,7 @@ export const WalletConnect: React.FC<WalletConnectProps> = () => {
       )}
       {active && account && !loading && (
         <CustomDropdown menu={menu} className="w-44 justify-center">
-          {shortenAddress(account)}{' '}
+          {shortenAddress(account)}
         </CustomDropdown>
       )}
     </>

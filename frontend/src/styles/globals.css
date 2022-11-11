@@ -8,6 +8,7 @@
 html,
 body {
   font-size: 16px;
+  @apply overflow-hidden;
 }
 
 .custom-dropdown .ant-dropdown-menu-item {
@@ -36,4 +37,55 @@ body {
 }
 .asen-menu.ant-menu-item-selected::after {
   border: none !important;
+}
+
+.ant-btn-background-ghost.ant-btn-primary {
+  @apply text-black border-indigo-500 font-medium tracking-wide;
+  text-shadow: none;
+}
+.ant-btn-background-ghost.ant-btn-primary:hover {
+  @apply !text-black;
+}
+
+.asen-modal .ant-modal-content {
+  @apply bg-gradient-to-br from-sky-100 to-indigo-300 rounded-xl;
+}
+
+.asen-modal .ant-modal-header {
+  background-color: transparent;
+  border: none;
+}
+
+.asen-modal .ant-modal-footer {
+  border: none;
+}
+
+.ant-form-large .ant-form-item-label > label {
+  height: auto;
+}
+.ant-input-number {
+  width: 100%;
+}
+.ant-input,
+.ant-input-number-input,
+.debounce-select input {
+  @apply bg-transparent placeholder:text-gray-600;
+}
+
+.ant-upload-list-item-list-type-picture-card {
+  @apply !p-0 !border-indigo-500 !rounded-lg shadow-lg;
+}
+.ant-upload-select-picture-card {
+  @apply !bg-transparent !border-indigo-500 !rounded-lg shadow-lg;
+}
+
+.debounce-select .ant-select-selector {
+  @apply !bg-transparent !rounded-md !border-gray-500 hover:!border-indigo-500 focus:!border-indigo-500;
+}
+
+.custom-carousel--dots li button {
+  @apply !bg-indigo-600;
+}
+.custom-card--meta .ant-card-meta-title {
+  @apply capitalize text-xl;
 }

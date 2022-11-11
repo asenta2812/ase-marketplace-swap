@@ -23,19 +23,20 @@ export const Navbar: React.FC<NavbarProps> = () => {
       >
         <Menu.Item
           className="asen-menu items-center"
-          key="swap"
-          icon={<SwapOutlined />}
-          onClick={() => pathname !== '/' && push('/')}
-        >
-          Swap
-        </Menu.Item>
-        <Menu.Item
-          className="asen-menu items-center"
           key="marketplace"
           icon={<ShopOutlined />}
           onClick={() => pathname !== '/marketplace' && push('/marketplace')}
         >
           Marketplace
+        </Menu.Item>
+
+        <Menu.Item
+          className="asen-menu items-center"
+          key="swap"
+          icon={<SwapOutlined />}
+          onClick={() => pathname !== '/swap' && push('/swap')}
+        >
+          Swap
         </Menu.Item>
       </Menu>
     </>

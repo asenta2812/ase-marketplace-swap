@@ -11,20 +11,20 @@ export default function (app: Application): Model<any> {
   const { Schema } = mongooseClient;
   const schema = new Schema(
     {
-      name: { type: String, required: true },
-      nft_id: { type: Number, required: true },
-      owner_id: { type: Number, required: true },
+      name: { type: String, required: true, unique: true, index: true },
+      nft_id: { type: String, required: true, unique: true, index: true },
+      owner_id: { type: Schema.Types.ObjectId, required: true },
       gender: { type: String, default: 'male', enum: ['male', 'female'] },
       stats_attack: { type: Number },
       stats_def: { type: Number },
       stats_hp: { type: Number },
       stats_speed: { type: Number },
-      parent_id: { type: Number },
-      mother_id: { type: Number },
+      father_id: { type: String },
+      mother_id: { type: String },
       listing_price: { type: Number },
       listed_at: { type: Date },
       status: { type: String },
-      user_buy_id: { type: Number },
+      user_buy_id: { type: Schema.Types.ObjectId },
       images: { type: Array },
     },
     {

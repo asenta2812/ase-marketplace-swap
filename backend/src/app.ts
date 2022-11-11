@@ -9,7 +9,6 @@ import configuration from '@feathersjs/configuration';
 import express from '@feathersjs/express';
 import socketio from '@feathersjs/socketio';
 
-
 import { Application } from './declarations';
 import logger from './logger';
 import middleware from './middleware';
@@ -19,17 +18,22 @@ import channels from './channels';
 import { HookContext as FeathersHookContext } from '@feathersjs/feathers';
 import authentication from './authentication';
 import mongoose from './mongoose';
+import { initAws } from './aws';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const app: Application = express(feathers());
-export type HookContext<T = any> = { app: Application } & FeathersHookContext<T>;
+export type HookContext<T = any> = {
+  app: Application;
+} & FeathersHookContext<T>;
 
 // Load app configuration
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
-app.use(helmet({
-  contentSecurityPolicy: false
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(compress());
 app.use(express.json());
@@ -43,6 +47,9 @@ app.configure(express.rest());
 app.configure(socketio());
 
 app.configure(mongoose);
+
+// init aws
+initAws(app);
 
 // Configure other middleware (see `middleware/index.ts`)
 app.configure(middleware);

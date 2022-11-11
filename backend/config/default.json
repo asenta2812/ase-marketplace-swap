@@ -24,5 +24,11 @@
       "expiresIn": "1d"
     }
   },
-  "mongodb": "mongodb+srv://nghiachi:u6PzMOopqt3aZa1C@project-1.gshpd.mongodb.net/test"
+  "mongodb": "mongodb+srv://nghiachi:u6PzMOopqt3aZa1C@project-1.gshpd.mongodb.net/test",
+  "awsConfig": {
+    "accessKeyId": "AKIASUIXVO6BE4B6XXNS",
+    "secretAccessKey": "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",
+    "region": "ap-southeast-1",
+    "bucket": "asenta-marketplace-bucket"
+  }
 }

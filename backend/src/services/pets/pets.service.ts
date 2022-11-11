@@ -8,14 +8,15 @@ import hooks from './pets.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'pets': Pets & ServiceAddons<any>;
+    pets: Pets & ServiceAddons<any>;
   }
 }
 
 export default function (app: Application): void {
   const options = {
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get('paginate'),
+    whitelist: ['$text', '$search', '$regex'],
   };
 
   // Initialize our service with any options it requires

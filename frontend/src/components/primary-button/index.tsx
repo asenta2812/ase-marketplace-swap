@@ -6,7 +6,7 @@ import React from 'react';
 interface PrimaryButtonProps {
   children?: React.ReactNode;
   icon?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   loading?: boolean;
   ghost?: boolean;
   size?: SizeType;
@@ -31,7 +31,7 @@ export const PrimaryButton = React.forwardRef<
           shape={shape || 'round'}
           size={size || 'large'}
           className={clsx(
-            'text-gray-50 bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-300 flex items-center border-indigo-500 hover:border-indigo-500 shadow-xl',
+            'text-gray-50 bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-300 flex items-center border-indigo-500 hover:border-indigo-500 shadow-xl tracking-wide font-medium',
             className
           )}
           onClick={onClick}

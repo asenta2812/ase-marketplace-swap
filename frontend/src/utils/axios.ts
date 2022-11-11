@@ -8,15 +8,12 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (response) {
     // Do something with response data
-    const url = response.url;
-    if (!url?.includes('auth')) {
-      const token = getLocalStorage<string>();
-      if (token) {
-        response.headers = {
-          ...response.headers,
-          Authentication: 'Bearer ' + token,
-        };
-      }
+    const token = getLocalStorage<string>();
+    if (token) {
+      response.headers = {
+        ...response.headers,
+        Authorization: 'Bearer ' + token,
+      };
     }
     return response;
   },

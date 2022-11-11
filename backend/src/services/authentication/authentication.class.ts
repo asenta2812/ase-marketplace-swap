@@ -83,6 +83,7 @@ export class CustomAuthenticationService extends AuthenticationService {
           nonce,
           name: user.name,
           avatar: user.avatar,
+          sub: user._id,
         });
 
         return res.status(200).send({
