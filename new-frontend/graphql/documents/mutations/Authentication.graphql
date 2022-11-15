@@ -1,0 +1,13 @@
+mutation RequestNonce($input: RequestNonceInput!) {
+    requestNonce(input: $input) {
+        nonce
+        address
+    }
+}
+
+mutation VerifySignature($input: VerifySignatureInput!) {
+    verifySignature(input: $input) {
+        accessToken
+        nonce
+    }
+}

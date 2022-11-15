@@ -1,0 +1,36 @@
+type User {
+    id: ID!
+    address: String!
+    avatar: String!
+    nonce: Int
+    accessToken: String
+    name: String
+}
+
+input RequestNonceInput {
+    address: String!
+}
+
+type RequestNonceOutput {
+    address: String!
+    nonce: Int!
+}
+
+input VerifySignatureInput {
+    address: String!
+    nonce: Int!
+    signature: String!
+}
+
+type VerifySignatureOutput {
+    accessToken: String!
+    nonce: Int!
+}
+
+type Query {
+    getUser(id: ID!): User
+}
+type Mutation {
+    requestNonce(input: RequestNonceInput!): RequestNonceOutput
+    verifySignature(input: VerifySignatureInput!): VerifySignatureOutput
+}

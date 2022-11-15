@@ -1,0 +1,7 @@
+fragment userAttributes on User {
+    name
+    avatar
+    address
+    accessToken
+    nonce
+}

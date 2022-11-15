@@ -1,0 +1,7 @@
+#import "../fragments/UserFragment"
+
+query UserQuery($id: ID!) {
+    getUser(id: $id) {
+        ...userAttributes
+    }
+}

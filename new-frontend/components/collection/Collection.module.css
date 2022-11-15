@@ -1,0 +1,44 @@
+.wrapper {
+    padding: 1rem 1.625rem;
+    border-width: 1px;
+    min-width: 16rem;
+    max-width: 25rem;
+    width: fit-content;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.rankNumber {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    @apply bg-jacarta-700;
+}
+.tag {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 100%;
+}
+
+.verify {
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    transform: translate(-50%, -75%);
+    @apply bg-green;
+}
+
+.content {
+    margin-left: 1rem;
+}
+.content h6 {
+    @apply text-base truncate;
+}
+.content p {
+    @apply mt-[3px] truncate;
+}

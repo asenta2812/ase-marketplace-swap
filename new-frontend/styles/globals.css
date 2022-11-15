@@ -22,13 +22,13 @@ a {
 * {
     box-sizing: border-box;
 }
-
 @layer components {
-    [class^='text-heading'] {
-        @apply font-dm-sans font-semibold;
+    [class^='text-heading'],
+    [class*='text-heading'] {
+        @apply font-cal-sans font-semibold;
     }
     .text-heading-1 {
-        @apply text-[2.5rem] text-;
+        @apply text-[2.5rem];
     }
 
     .text-heading-2 {
@@ -70,33 +70,46 @@ a {
     .text-heading-tiny {
         @apply text-sm;
     }
-
-    [class^='text-body'] {
+    /* text-body-{fontweight}-{type} */
+    [class^='text-body'],
+    [class*='text-body'] {
         @apply font-dm-sans font-normal;
     }
-    [class^='text-body-medium'] {
+    [class^='text-body-medium'],
+    [class*='text-body-medium'] {
         @apply font-medium;
     }
-    [class^='text-body-bold'] {
+    [class^='text-body-bold'],
+    [class*='text-body-bold'] {
         @apply font-bold;
     }
-    [class$='lead'] {
-        @apply text-[1.25rem];
+    .text-body-lead,
+    .text-body-medium-lead,
+    .text-body-bold-lead {
+        @apply text-xl;
     }
-    [class$='regular'] {
+    .text-body-regular,
+    .text-body-medium-regular,
+    .text-body-bold-regular {
         @apply text-base;
     }
-    [class$='small'] {
+    .text-body-small,
+    .text-body-medium-small,
+    .text-body-bold-small {
         @apply text-sm;
     }
-    [class$='xsmall'] {
+    .text-body-xsmall,
+    .text-body-medium-xsmall,
+    .text-body-bold-xsmall {
         @apply text-[.8125rem];
     }
-    [class$='xsmall-tight'] {
+    .text-body-medium-xsmall-tight {
         @apply text-[.8125rem] tracking-[-0.03rem];
     }
-    [class$='tinyb'] {
-        @apply text-[.75rem];
+    .text-body-tiny,
+    .text-body-medium-tiny,
+    .text-body-bold-tiny {
+        @apply text-xs;
     }
     .text-body-large {
         @apply font-medium text-[1.5rem];
@@ -115,16 +128,16 @@ a {
     placeholder:text-jacarta-500
     hover:!border-accent-default
     focus:!border-accent-default focus:outline-none focus:shadow-none
-    disabled:bg-jacarta-50 disabled:border-jacarta-100 disabled:placeholder:text-jacarta-400;
+    disabled:bg-jacarta-50 disabled:border-jacarta-100 disabled:placeholder:text-jacarta-400
+    dark:text-white dark:bg-jacarta-700;
 }
 
 .custom-select .ant-select-selector {
     @apply !bg-white !border-jacarta-100 !rounded-lg !h-[3rem]
-  font-dm-sans font-normal !text-jacarta-700 !text-base !px-[1rem];
+  font-dm-sans font-normal !text-jacarta-700 !text-base !px-[1rem]
+  dark:!bg-jacarta-700 dark:!text-white;
 }
-/* .custom-select input {
-    @apply bg-transparent;
-} */
+
 .custom-select.ant-select-sm .ant-select-selector {
     @apply !h-[2.125rem] !text-sm;
 }
@@ -179,18 +192,11 @@ a {
 }
 
 .custom-checkbox .ant-checkbox-inner {
-    @apply border-jacarta-200 rounded w-5 h-5 bg-white;
-}
-.custom-checkbox.custom-checkbox--dark .ant-checkbox-inner {
-    @apply border-jacarta-500 bg-jacarta-600;
+    @apply border-jacarta-200 rounded w-5 h-5 bg-white 
+    dark:border-jacarta-500 dark:bg-jacarta-600;
 }
 .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
-    @apply bg-white;
-}
-.custom-checkbox.custom-checkbox--dark
-    .ant-checkbox-checked
-    .ant-checkbox-inner {
-    @apply bg-jacarta-600;
+    @apply bg-white dark:bg-jacarta-600;
 }
 .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner::after {
     left: 5px;
@@ -207,10 +213,8 @@ a {
 }
 
 .custom-checkbox .ant-checkbox + span {
-    @apply font-dm-sans font-normal text-sm text-jacarta-500 self-center;
-}
-.custom-checkbox.custom-checkbox--dark .ant-checkbox + span {
-    @apply text-jacarta-300;
+    @apply font-dm-sans font-normal text-sm text-jacarta-500 
+    self-center dark:text-jacarta-300;
 }
 
 .custom-search .ant-input-prefix {
@@ -218,14 +222,4 @@ a {
 }
 .custom-search input {
     @apply bg-transparent text-inherit;
-}
-
-.custom-search--dark,
-.custom-input--dark,
-.custom-textarea--dark {
-    @apply text-white bg-jacarta-700;
-}
-
-.custom-select--dark .ant-select-selector {
-    @apply !bg-jacarta-700 !text-white;
 }
