@@ -1,9 +1,9 @@
 @import 'cal-sans';
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import '~antd/dist/antd.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~antd/dist/antd.css';
 @import 'remixicon/fonts/remixicon.css';
 
 html,
@@ -222,8 +222,4 @@ a {
 }
 .custom-search input {
     @apply bg-transparent text-inherit;
-}
-
-h6 {
-    margin-bottom: 0px;
 }

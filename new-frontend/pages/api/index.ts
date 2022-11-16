@@ -1,5 +1,5 @@
 import resolvers from '@/graphql/resolvers';
-import { createServer } from '@graphql-yoga/node';
+import { createServer, GraphQLYogaError } from '@graphql-yoga/node';
 import type { PrismaClient } from '@prisma/client';
 import { readFileSync } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -30,6 +30,11 @@ const server = createServer<{
         resolvers,
     },
     context: createContext(),
+    maskedErrors: {
+        formatError: (error, message, _) => {
+            return new GraphQLYogaError(String(error));
+        },
+    },
 });
 
 export default server.requestListener;
