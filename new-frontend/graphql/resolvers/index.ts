@@ -10,5 +10,15 @@ const resolvers: Resolvers = {
             return verifySignature(input, prisma);
         },
     },
+
+    Query: {
+        getUser: async (_, { id }, { prisma }) => {
+            let user = await prisma.user.findUnique({ where: { id } });
+            // if(user){
+            //   user = {...user, address: process.env.}
+            // }
+            return user;
+        },
+    },
 };
 export default resolvers;
